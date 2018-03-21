@@ -6,10 +6,11 @@ end
 
 task :toot => :environment do
 
-    #@toots = Mastodon::REST::Timelines.new(base_url: ENV["MASTODON_URL"], bearer_token: ENV["ACCESS_TOKEN"])
-
-    puts @toots
     client = Mastodon::REST::Client.new(base_url: ENV["MASTODON_URL"], bearer_token: ENV["ACCESS_TOKEN"])
+
+    puts client.public_timeline
+
+    puts client
     message = ("test")
     response = client.create_status(message)
 end
