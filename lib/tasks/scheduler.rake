@@ -6,7 +6,7 @@ end
 
 task :toot => :environment do
 
-    @toots = Mastodon::REST::Timelines.public_timeline
+    @toots = Mastodon::REST::Timelines.new
 
     puts @toots
     client = Mastodon::REST::Client.new(base_url: ENV["MASTODON_URL"], bearer_token: ENV["ACCESS_TOKEN"])
