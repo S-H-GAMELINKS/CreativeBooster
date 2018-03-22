@@ -33,7 +33,7 @@ task :follow => :environment do
   end
 end
 
-task :anfollow => :environment do
+task :unfollow => :environment do
   client = Mastodon::REST::Client.new(base_url: ENV["MASTODON_URL"], bearer_token: ENV["ACCESS_TOKEN"])
 
   @keywords = Keyword.all
