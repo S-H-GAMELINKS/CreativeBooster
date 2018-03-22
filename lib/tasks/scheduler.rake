@@ -8,7 +8,9 @@ task :toot => :environment do
 
     client = Mastodon::REST::Client.new(base_url: ENV["MASTODON_URL"], bearer_token: ENV["ACCESS_TOKEN"])
 
-    client.public_timeline(:local => true, :limit => 100).each do |toot|
-      response = client.reblog(toot.id)
+    client.public_timeline(:local => true, :limit => 10000).each do |toot|
+      if /創作/ =~ toot.content then 
+        response = client.reblog(toot.id)
+      end
     end
 end
