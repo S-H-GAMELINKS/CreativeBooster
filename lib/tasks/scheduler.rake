@@ -12,15 +12,7 @@ task :toot => :environment do
     #指定のハッシュタグを含むTootのBoost
     @keywords.each do |keyword|
 
-      #ローカルタイムライン
-      client.public_timeline(:local => true, :limit => 1000).each do |toot|
-        if /#{keyword}/ =~ toot.content
-          response = client.reblog(toot.id)
-        end
-      end
-
-      #連合タイムライン
-      client.public_timeline(:limit => 1000).each do |toot|
+      client.hashtag_timeline(keyword, :limit => 1000).each do |toot|
         if /#{keyword}/ =~ toot.content
           response = client.reblog(toot.id)
         end
