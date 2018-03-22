@@ -41,8 +41,8 @@ task :unfollow => :environment do
   @keywords.each do |keyword|
     
     client.hashtag_timeline(keyword.key, :limit => 5).each do |toot|
-      url = toot.account.id
-      response = client.unfollw(id)
+      id = toot.account.id
+      response = client.unfollow(id)
     end
   end
 end
