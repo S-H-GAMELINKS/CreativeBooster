@@ -7,17 +7,23 @@ end
 task :toot => :environment do
 
     client = Mastodon::REST::Client.new(base_url: ENV["MASTODON_URL"], bearer_token: ENV["ACCESS_TOKEN"])
+    @keywords = Keyword.all
 
+    #ローカルタイムラインの指定キーワードを含むTootのBoost
     client.public_timeline(:local => true, :limit => 10000).each do |toot|
-      if /創作/ =~ toot.content then 
-        response = client.reblog(toot.id)
+      @keywords.each do |keyword|
+        if /#{keyword}/ =~ toot.content then 
+          response = client.reblog(toot.id)
+        end
       end
     end
       
-    #連合タイムラインのBoost
-    client.public_timeline(:limit => 10000).each do |toot|
-      if /創作/ =~ toot.content then 
-        response = client.reblog(toot.id)
+    #連合タイムラインの指定キーワードを含むTootのBoost
+    client.public_timeline(:local => true, :limit => 10000).each do |toot|
+      @keywords.each do |keyword|
+        if /#{keyword}/ =~ toot.content then 
+          response = client.reblog(toot.id)
+        end
       end
     end
 end
