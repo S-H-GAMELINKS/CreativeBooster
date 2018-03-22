@@ -17,3 +17,16 @@ task :toot => :environment do
       end
     end
 end
+
+task :follow => :environment do
+  client = Mastodon::REST::Client.new(base_url: ENV["MASTODON_URL"], bearer_token: ENV["ACCESS_TOKEN"])
+
+  @keywords = Keyword.all
+
+  @keywords.each do |keyword|
+    
+    client.hashtag_timeline(keyword.key, :limit => 5).each do |toot|
+      response = client.follow_by_uri(toot.uri)
+    end
+  end
+end
