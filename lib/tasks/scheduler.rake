@@ -14,6 +14,7 @@ task :toot => :environment do
 
       client.hashtag_timeline(keyword.key, :limit => 100).each do |toot|
           response = client.reblog(toot.id)
+          response = client.favourite(toot.id)
       end
     end
 end
