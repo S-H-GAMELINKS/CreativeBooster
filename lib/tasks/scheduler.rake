@@ -9,21 +9,10 @@ task :toot => :environment do
     client = Mastodon::REST::Client.new(base_url: ENV["MASTODON_URL"], bearer_token: ENV["ACCESS_TOKEN"])
     @keywords = Keyword.all
 
-    #ローカルタイムラインの指定キーワードを含むTootのBoost
-    client.public_timeline(:local => true, :limit => 10000).each do |toot|
-      @keywords.each do |keyword|
-        if /#{keyword.key}/ =~ toot.content then 
-          response = client.reblog(toot.id)
-        end
-      end
-    end
-      
-    #連合タイムラインの指定キーワードを含むTootのBoost
-    client.public_timeline(:limit => 10000).each do |toot|
-      @keywords.each do |keyword|
-        if /#{keyword.key}/ =~ toot.content then 
-          response = client.reblog(toot.id)
-        end
+    #指定のハッシュタグを含むTootのBoost
+    @keyword.each do |keyword|
+      client.hashtag_timeline(keyword, :limit => 1000).each do |toot|
+        response = client.reblog(toot.id)
       end
     end
 end
