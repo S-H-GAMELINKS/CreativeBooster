@@ -1,24 +1,23 @@
-# README
+# Creative Booster
+## 概要
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Creatodonにて運用している、創作関係の単語を含むTootを定期的にBoostしてくれるもの
+キーワードなどはKeywordモデルを使用して随時追加中
 
-Things you may want to cover:
+## 環境
+Ruby on Rails 5.2.0rc2
 
-* Ruby version
+Ruby 2.3.3
 
-* System dependencies
+## ライセンス
 
-* Configuration
+ライセンスは[MITライセンス](./LICENSE)です。
 
-* Database creation
+## 参考資料
 
-* Database initialization
+[mastodon API](https://www.slideshare.net/treby/mastodon-api)
+[mastodon-watcher](https://github.com/treby/mastodon-watcher/blob/master/mastodon.rb)
 
-* How to run the test suite
+タイムラインの取得に関して上記のソースコードなどを参考にさせていただきました。
+この場を借りて感謝申し上げます。
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
