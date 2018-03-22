@@ -19,7 +19,7 @@ task :toot => :environment do
     end
       
     #連合タイムラインの指定キーワードを含むTootのBoost
-    client.public_timeline(:local => true, :limit => 10000).each do |toot|
+    client.public_timeline(:limit => 10000).each do |toot|
       @keywords.each do |keyword|
         if /#{keyword}/ =~ toot.content then 
           response = client.reblog(toot.id)
