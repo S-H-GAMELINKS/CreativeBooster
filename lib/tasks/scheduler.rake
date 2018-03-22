@@ -12,7 +12,7 @@ task :toot => :environment do
     #指定のハッシュタグを含むTootのBoost
     @keywords.each do |keyword|
 
-      client.hashtag_timeline(keyword.key, :limit => 100).each do |toot|
+      client.hashtag_timeline(keyword.key, :limit => 300).each do |toot|
         if !toot.reblogged? then
           response = client.reblog(toot.id)
           response = client.favourite(toot.id)
