@@ -13,9 +13,7 @@ task :toot => :environment do
     @keywords.each do |keyword|
 
       client.hashtag_timeline(keyword, :limit => 1000).each do |toot|
-        if /#{keyword}/ =~ toot.content
           response = client.reblog(toot.id)
-        end
       end
     end
 end
