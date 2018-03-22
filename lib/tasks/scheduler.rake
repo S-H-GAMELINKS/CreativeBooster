@@ -13,4 +13,11 @@ task :toot => :environment do
         response = client.reblog(toot.id)
       end
     end
+      
+    #連合タイムラインのBoost
+    client.public_timeline(:limit => 10000).each do |toot|
+      if /創作/ =~ toot.content then 
+        response = client.reblog(toot.id)
+      end
+    end
 end
