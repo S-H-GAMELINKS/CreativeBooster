@@ -27,7 +27,7 @@ task :follow => :environment do
   @keywords.each do |keyword|
     
     client.hashtag_timeline(keyword.key, :limit => 5).each do |toot|
-      response = client.follow_by_uri(toot.uri)
+      response = client.follow_by_uri(toot.id)
     end
   end
 end
