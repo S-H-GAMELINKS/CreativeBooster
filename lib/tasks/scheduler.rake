@@ -21,6 +21,17 @@ task :toot => :environment do
     end
 end
 
+task :followed_and_mention => :environment do
+  client = Mastodon::REST::Client.new(base_url: ENV["MASTODON_URL"], bearer_token: ENV["ACCESS_TOKEN"])
+
+  user = client.followers(1).first
+
+  if user.url =~ /gamelinks007.net/ then
+    message = ("@{user.acct}さん！フォローありがとうございます！")
+    response = client.create_status(message)
+  end
+end
+
 task :follow => :environment do
   client = Mastodon::REST::Client.new(base_url: ENV["MASTODON_URL"], bearer_token: ENV["ACCESS_TOKEN"])
 
