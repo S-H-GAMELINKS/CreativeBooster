@@ -27,7 +27,7 @@ task :followed_and_mention => :environment do
   user = client.followers(1).first
 
   if user.url =~ /gamelinks007.net/ then
-    message = ("@{user.acct}さん！フォローありがとうございます！")
+    message = ("@#{user.acct}さん！フォローありがとうございます！")
     response = client.create_status(message)
   end
 end
